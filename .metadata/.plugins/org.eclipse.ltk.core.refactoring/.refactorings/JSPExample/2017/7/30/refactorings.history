@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SquareRoot.jsp&apos; to &apos;WEB-INF&apos;&#x0D;&#x0A;- Original project: &apos;JSPExample&apos;&#x0D;&#x0A;- Destination element: &apos;WEB-INF&apos;&#x0D;&#x0A;- Original element: &apos;SquareRoot.jsp&apos;" description="Copy file" element1="WebContent/SquareRoot.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1500800616110" target="/Project Alpha/WebContent/WEB-INF" units="0" version="1.0"/>
+</session>

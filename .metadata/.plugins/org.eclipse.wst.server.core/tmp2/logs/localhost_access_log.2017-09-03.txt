@@ -1,0 +1,12 @@
+127.0.0.1 - - [03/Sep/2017:18:33:39 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:18:33:54 +0530] "GET /Project_Alpha/default.jsp HTTP/1.1" 200 17440
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:18:33:54 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:02:25 +0530] "GET /Project_Alpha/Report_java.pdf HTTP/1.1" 200 68038
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:02:25 +0530] "GET /favicon.ico HTTP/1.1" 404 1016
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:02:42 +0530] "GET /Project_Alpha/access.jsp HTTP/1.1" 200 4073
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:02:53 +0530] "POST /Project_Alpha/cl_psw_validate.jsp HTTP/1.1" 200 8749
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:03:10 +0530] "GET /Project_Alpha/default.jsp HTTP/1.1" 200 17437
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:03:10 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:03:15 +0530] "GET /Project_Alpha/cl_access.jsp HTTP/1.1" 200 8749
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:06:01 +0530] "GET /Project_Alpha/s_out.jsp HTTP/1.1" 200 17440
+0:0:0:0:0:0:0:1 - - [03/Sep/2017:21:06:01 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068

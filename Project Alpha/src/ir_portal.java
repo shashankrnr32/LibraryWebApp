@@ -1,0 +1,300 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ir_portal")
+public class ir_portal extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    public ir_portal() {
+        super();
+    }
+    @SuppressWarnings({ "resource", "finally" })
+	public void doGet(HttpServletRequest request,
+    	      HttpServletResponse response) throws ServletException,
+    	      IOException {
+    		     
+    		    int i=0;
+    		    String url = "jdbc:mysql://localhost:3306/"; 
+    		    String dbName = "project alpha"; 
+    		    String driver = "com.mysql.jdbc.Driver"; 
+    		    String user = "root";  
+    		    String password = ""; 
+    		    long fine=0;
+    		    
+    		    try { 
+    		        Class.forName(driver).newInstance(); 
+    		        Connection conn = DriverManager.getConnection(url+dbName, user, password); 
+    		        conn.setAutoCommit(false);
+    		        String op=request.getParameter("type");
+    		        String s1=request.getParameter("sid").toUpperCase();
+    		        String s2=request.getParameter("bid");
+    		        String s3="UPDATE `books` SET `avail`=? WHERE `id`=? AND `avail`=?";
+    		        String s4="UPDATE `sdb` SET `book`=?, `idate`=CURRENT_DATE, `rdate`=DATE_ADD(CURRENT_DATE,INTERVAL 14 DAY),`flag`=? WHERE `sid`=? AND `flag`=?";
+    		        String s5="INSERT INTO `records`(`bid`, `type`, `sid`, `rdate`, `fine`) VALUES (?,?,?,CURRENT_DATE,?)";
+    		        PreparedStatement ps1,ps2,ps3,ps4,ps5,ps6,ps7;
+    		        System.out.println("here"+op);
+    		        int i1=0,i2=0,i3=0;
+    		        Date d = null;
+    		        
+    		        int test1=0,test2=0;
+    		        String error1="",error2="",error3="";
+    		        switch(op){
+    		        case "0":			
+    		        				ps1=conn.prepareStatement(s3);
+    		        				ps1.setString(1, "0");
+    		        				ps1.setString(2, s2);
+    		        				ps1.setString(3, "1");
+    		        				i1=ps1.executeUpdate();
+    		        				
+    		        				
+    		        				if(i1!=0){
+    		        					
+    		        				conn.commit();
+    		        				ps2=conn.prepareStatement(s4);
+    		        				ps2.setString(1, s2);
+    		        				ps2.setString(2, "0");;
+    		        				ps2.setString(3, s1);
+    		        				ps2.setString(4, "1");
+    		        				i2=ps2.executeUpdate();
+    		        				test1=1;
+    		        				
+    		        				if(i2!=0){
+    		        					
+    		        					conn.commit();
+        		        				ps3=conn.prepareStatement(s5);
+        		        				ps3.setString(1, s2);
+        		        				ps3.setString(2, "0");
+        		        				ps3.setString(3, s1);
+        		        				ps3.setString(4, "0");
+        		        				ps3.executeUpdate();
+        		        				conn.commit();
+        		        				test2=1;
+        		        				i=3;
+        		        				}
+    		        				else{
+    		        				ps1=conn.prepareStatement(s3);
+    		        				ps1.setString(1, "1");
+    		        				ps1.setString(2, s2);
+    		        				ps1.setString(3, "0");
+    		        				i1=ps1.executeUpdate();
+    		        				conn.commit();
+    		        				
+    		        				}
+    		        				}
+    		        				conn.commit();
+    		        				conn.setAutoCommit(true);
+    		        				
+    		        				if(test1==1&&test2==1){
+    		        					
+    		        					String dateR1=null,dateR2=null,dateR3=null,dateR4=null;
+    		        					ps6=conn.prepareStatement("SELECT `rdate`,`sid`,`sname` FROM `sdb` where `sid`='"+s1+"'" );
+    		        					ResultSet r=ps6.executeQuery();
+    		        					while(r.next()){
+    		        					dateR1=r.getString(1);
+    		        					dateR2=r.getString(2);
+    		        					dateR3=r.getString(3);
+    		        					}
+    		        					ps6=conn.prepareStatement("SELECT `name` FROM `books` where `id`='"+s2+"'" );
+    		        					r=ps6.executeQuery();
+    		        					while(r.next()){
+    		        						dateR4=r.getString(1);
+    		        					}
+    		        					String s="<b>Student Name:</b> "+dateR3+"<br></br><b>Student ID:</b> "+dateR2+"<br></br><b>Book ID:</b> "+s2+"<br></br><b>Book Name:</b> ";
+    		        					String ss=dateR4+"<br></br><b>Return Date:</b> "+dateR1;
+    		        					request.setAttribute("type","0");
+    		        					request.setAttribute("R_DATE",s+ss);
+    		        					System.out.println("SUCCESS ISSUE");
+    		        				}
+    		        				else{
+    		        					request.setAttribute("type","-0");
+    		        					ps6=conn.prepareStatement("SELECT `book` FROM `sdb` where `sid`='"+s1+"'" );
+    		        					ResultSet r=ps6.executeQuery();
+    		        					
+    		        					while(r.next()){
+    		        						error1=r.getString(1);
+    		        					}
+    		        					if(error1.equals("0")){
+    		        						error1="This Book is not Available";
+    		        					}
+    		        					else{
+    		        						error1="This Student has to return a book<br></br>Book ID: "+error1;
+    		        					}
+    		        					request.setAttribute("I_ERROR",error1);
+    		        					
+    		        				}
+    		        				RequestDispatcher rd=request.getRequestDispatcher("alert_issue.jsp");
+    		        				rd.forward(request, response);
+    		        				conn.close();
+    		        				break;
+    		        				
+    		        				
+    		        case "1":		ps6=conn.prepareStatement("SELECT `sid` FROM `sdb` WHERE `book`="+s2);
+    		        				ResultSet ri=ps6.executeQuery();
+    		        				try{
+    		        					while(ri.next()){
+        		        					s1=ri.getString(1);
+        		        				}
+        		        				if(s1!=null){
+        		        					ps5=conn.prepareStatement(s3);
+        		        					ps5.setString(1, "1");
+        		        					ps5.setString(2,s2);
+        		        					ps5.setString(3, "0");
+        		        					i1=ps5.executeUpdate();
+        		        					
+        		        					if(i1>0){
+        		        						conn.commit();
+        		        						ps5=conn.prepareStatement("SELECT `rdate` FROM `sdb` WHERE `sid`='"+s1+"'");
+        		        						ResultSet rr=ps5.executeQuery();
+        		        						while(rr.next()){
+        		        							d=rr.getDate(1);
+        		        						}
+        		        						Date today=new Date();
+        		        						if(today.after(d)){
+        		        							long ff=today.getTime()-d.getTime();
+        		        							fine=TimeUnit.DAYS.convert(ff, TimeUnit.MILLISECONDS);	
+        		        						}
+        		        						ps5=conn.prepareStatement("UPDATE `sdb` SET `book`=0,`flag`=1 WHERE `sid`='"+s1+"'");
+        		        						int l=ps5.executeUpdate();
+        		        						if(l>0){
+        		        							conn.commit();
+        		        						
+        		        							s5="INSERT INTO `records`(`bid`, `type`, `sid`, `rdate`, `fine`) VALUES (?,?,?,CURRENT_DATE,?)";
+        						    				ps3=conn.prepareStatement(s5);
+        						    				System.out.println("1");
+        						    				ps3.setString(1, s2);
+        						    				ps3.setString(2, "1");
+        						    				ps3.setString(3, s1);
+        						    				
+        						    				ps3.setString(4,Long.toString(fine));
+        						    				ps3.executeUpdate();
+        						    				conn.commit();
+        						    				request.setAttribute("type", "1");
+        						    				request.setAttribute("FINE", fine);
+        						    				System.out.println("SUCCESS RETURN");
+        						    				
+        		        						}    		        						    		        						
+        		        					}
+        		        				}
+        		        				else{
+        		        					request.setAttribute("type", "-1");
+        		        				}
+    				    				RequestDispatcher rd1=request.getRequestDispatcher("alert_issue.jsp");
+        		        				rd1.forward(request, response);
+        		        				conn.close();
+    		        				}
+    		        				catch(Exception e){
+    		        					request.setAttribute("type", "-1");
+    		        					RequestDispatcher rd1=request.getRequestDispatcher("alert_issue.jsp");
+        		        				rd1.forward(request, response);
+        		        				conn.close();
+    		        				}
+    		        				finally{
+    		        					break;
+    		        				}
+				    				
+    		        case "2":
+    		        	
+    		        	ps6=conn.prepareStatement("SELECT `sid` FROM `sdb` WHERE `book`="+s2);
+    		        	ResultSet r=ps6.executeQuery();
+    		        	System.out.println(r.toString());
+    		        	try{
+    		        		System.out.println("here3");
+    		        		while(r.next()){
+    		        			System.out.println("NULL");
+    		        			s1=r.getString(1);
+    		        			System.out.println("NULL");
+    		        		}
+    		        		ps5=conn.prepareStatement("SELECT `rdate` FROM `sdb` WHERE `sid`='"+s1+"'");
+    						ResultSet rr=ps5.executeQuery();
+    						while(rr.next()){
+    							d=rr.getDate(1);
+    						}
+    						Date today=new Date();
+    						if(today.after(d)){
+    							long ff=today.getTime()-d.getTime();
+    							fine=TimeUnit.DAYS.convert(ff, TimeUnit.MILLISECONDS);	
+    						}
+    		        		conn.setAutoCommit(false);
+    		        		ps2=conn.prepareStatement(s4);
+	        				ps2.setString(1, s2);
+	        				ps2.setString(2, "0");;
+	        				ps2.setString(3, s1);
+	        				ps2.setString(4, "0");
+	        				int err=ps2.executeUpdate();
+	        				if(err!=0){
+	        					conn.commit();
+	        					
+	        					ps3=conn.prepareStatement(s5);
+		        				ps3.setString(1, s2);
+		        				ps3.setString(2, "2");
+		        				ps3.setString(3, s1);
+		        				ps3.setString(4, Long.toString(fine));
+		        				int x=ps3.executeUpdate();
+		        				conn.commit();
+	        					
+		        				String dateR1=null,dateR2=null,dateR3=null,dateR4=null;
+	        					ps6=conn.prepareStatement("SELECT `rdate`,`sid`,`sname` FROM `sdb` where `sid`='"+s1+"'" );
+	        					ResultSet r1=ps6.executeQuery();
+	        					while(r1.next()){
+	        					dateR1=r1.getString(1);
+	        					dateR2=r1.getString(2);
+	        					dateR3=r1.getString(3);
+	        					}
+	        					ps6=conn.prepareStatement("SELECT `name` FROM `books` where `id`='"+s2+"'" );
+	        					r1=ps6.executeQuery();
+	        					while(r1.next()){
+	        						dateR4=r1.getString(1);
+	        					}
+	        					String s="<b>Student Name:</b> "+dateR3+"<br></br><b>Student ID:</b> "+dateR2+"<br></br><b>Book ID:</b> "+s2+"<br></br><b>Book Name:</b> ";
+	        					String ss=dateR4+"<br></br><b>Return Date:</b> "+dateR1;
+	        					request.setAttribute("R_DATE",s+ss);
+		        				
+	        					request.setAttribute("type","2");
+	        					request.setAttribute("FINE",Long.toString(fine));
+	        					
+	    		        		RequestDispatcher rd11=request.getRequestDispatcher("alert_issue.jsp");
+		        				rd11.forward(request, response);
+		        				conn.close();
+		        				System.out.println("SUCCESS RENEWAL");
+			    				break;
+    		        	}}
+    		        	
+    		        	catch(NullPointerException e){
+    		        		request.setAttribute("type","-2");
+    		        		RequestDispatcher rd11=request.getRequestDispatcher("alert_issue.jsp");
+	        				rd11.forward(request, response);
+	        				conn.close();
+		    				break;
+    		        	}
+    		        	
+    		        	
+    		        		
+	        				}
+    		        	
+    		        
+    		        
+    		    } catch (Exception e) { 
+    		    	request.setAttribute("type","-1");
+	        		RequestDispatcher rd11=request.getRequestDispatcher("alert_issue.jsp");
+    				rd11.forward(request, response);
+    		    	System.out.println("ERROR"+e);
+    		    	i=0;
+    		    	
+    		    }  		   
+    	  }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
+	}
+
+}

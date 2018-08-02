@@ -1,0 +1,10 @@
+127.0.0.1 - - [24/Aug/2017:08:50:10 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:08:50:13 +0530] "GET /Project_Alpha/default.jsp HTTP/1.1" 200 17440
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:08:50:13 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:08:50:37 +0530] "GET /Project_Alpha/default.jsp HTTP/1.1" 200 17440
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:08:50:37 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068
+127.0.0.1 - - [24/Aug/2017:10:29:57 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:10:30:16 +0530] "GET /Project_Alpha/default.jsp HTTP/1.1" 200 17440
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:10:30:16 +0530] "GET /Project_Alpha/css/materialize.min.css HTTP/1.1" 404 1068
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:10:51:27 +0530] "GET /Project_Alpha/Search.jsp?bookSearch=name&Text1=&Text7=Search HTTP/1.1" 200 29258
+0:0:0:0:0:0:0:1 - - [24/Aug/2017:17:24:03 +0530] "POST /Project_Alpha/psw_validate.jsp HTTP/1.1" 200 500

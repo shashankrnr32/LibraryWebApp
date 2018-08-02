@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Library Services</title>
+<script type="text/javascript">
+function scrollTo1(){ 
+document.getElementById('container1').scrollIntoView();
+}
+function scrollTo2(){
+document.getElementById('container2').scrollIntoView();
+
+}
+function changePlaceHolder(){
+var s=document.getElementById('selectClass');
+if(s.value=="name"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter Book Name';
+document.getElementsByName('Text1')[0].title='Name';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 32 && event.charCode <= 125;
+}
+document.getElementsByName('Text1')[0].maxLength='40';
+
+
+}
+else if(s.value=="id"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter ID';
+document.getElementsByName('Text1')[0].title='ID';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 48 && event.charCode <=57;
+}
+document.getElementsByName('Text1')[0].maxLength='6';
+}
+else if(s.value=="author"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter Author\'s Name';
+document.getElementsByName('Text1')[0].title='Author';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 32 && event.charCode <= 125;
+}
+document.getElementsByName('Text1')[0].maxLength='40';
+}
+else if(s.value=="publisher"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter Publisher\'s Name';
+document.getElementsByName('Text1')[0].title='Publisher';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 32 && event.charCode <= 125;
+}
+document.getElementsByName('Text1')[0].maxLength='40';
+
+}
+else if(s.value=="pubyear"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter Year Of Publication';
+document.getElementsByName('Text1')[0].title='Year of Publication';
+document.getElementsByName('Text1')[0].maxLength='4';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 48 && event.charCode <= 57;
+}
+}
+else if(s.value=="category"){
+document.getElementsByName('Text1')[0].value='';
+document.getElementsByName('Text1')[0].placeholder='Enter Category';
+document.getElementsByName('Text1')[0].title='Category';
+document.getElementsByName('Text1')[0].onkeypress=function myfunction(){
+    return event.charCode >= 32 && event.charCode <= 125;
+}
+document.getElementsByName('Text1')[0].maxLength='40';
+
+}
+
+
+}
+
+
+</script>
+<style type="text/css">
+body{
+	font-family: "Yu Gothic UI Light";
+	font-size: medium;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 0px;
+	padding:0;
+	margin:0;	
+}
+body::-webkit-scrollbar{
+	width:15px;
+	background-color:grey;
+	border-radius:50px;
+}
+body::-webkit-scrollbar-track {
+    box-shadow:10px 10px white;
+    }
+body::-webkit-scrollbar-thumb {
+  background-color: white;
+  outline: 1px solid slategrey;
+  border-radius:50px;
+ 
+}
+
+.MainNavBar{
+	background-color:#333;
+	height:80px;
+	width:100%;
+	border-bottom:5px;
+	border-bottom-color:white;
+	top:0px;
+	padding:0;
+	position:fixed;
+	margin:0;
+	box-shadow:10px 10px white;
+	border-radius:20px;
+	
+	
+}
+.title {
+	margin: 1px;
+	height:45px;
+	font-family: "Yu Gothic UI Light";
+	font-weight: 700;
+	font-style: normal;
+	text-transform: none;
+	font-variant: small-caps;
+	line-height: normal;
+	background-color: #333;
+	color:white;
+	width:100%;
+	
+	
+}
+.toolbar {
+	margin: 0px;
+	margin-left:0px;
+	padding: 0px;
+	width:inherit;
+	height:35px;
+	background-color: #333;
+    overflow:hidden;
+    border-radius:20px;
+    
+   
+}
+.toolbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    cursor:pointer;
+}
+.toolbar a:hover {
+    background-color: #ddd;
+    color: black;
+    box-shadow: 3px 3px 2px grey;
+}
+.toolbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+.toolbar-right{
+float:right;
+}
+.container1{
+	background-color: #333;
+	height:480px;
+	margin-top:1px;
+	margin-bottom:0;
+	color:white;
+	top:5px;
+	marrgin-top:20px;
+	padding-top:20px;
+	border-radius:20px;
+}
+.container1 img{
+	float:right;
+	width:640px;
+	height:inherit;
+	border:medium;
+	border-left:medium;
+	border-color:white;
+}
+.container1 h1{
+	float:left;
+	text-align:center;
+}
+.container1 p{
+	float:left;
+	font-size:15px;
+}
+.container1 br{
+	float:left
+}
+.container-inside{
+	float:left;
+	width:300px;
+	height:400px;
+	
+}
+.container-inside h1{
+    float:left;
+    padding:40px;
+	width:800px;
+	font-size:25px;
+	margin-left:125px;
+    text-align:justify;
+}
+.container-inside p{
+	float:left;
+	width:800px;
+	font-size:20px;
+	padding-left:40px;
+	margin-left:75px;
+}
+.container-inside a{
+	width:100px;
+	margin-left:148px;
+	color:white;
+}
+.container-inside button{
+	width:200px;
+	height:60px;
+	background:#333;
+	color:white;
+	border-style:double;
+	border-radius:35px;
+	cursor:pointer;
+	margin-left:34px;
+	font-family:"Yu Gothic UI Light";
+	font-size:medium;
+}
+.container-inside button:hover{
+	background-color:white;
+	color:#333;
+	font-weight:900;
+}
+.container2{
+	float:none;
+	background-image:url(images/search_books.jpg) ;
+	background-position:center;
+	background-color:#333;
+	background-repeat:inherit;
+	height:610px;
+	margin-top:1px;
+	text-align:center;
+	position:static;
+	vertical-align:top;
+	top:-14px;
+	border-radius:20px;
+}
+.container2 h1{
+	text-align:center;
+}
+.container2 p{
+	font-size:15px;
+	height:30px;
+}
+form{
+	padding:0px;
+	background:#333;
+	border-radius:75px;
+	margin-left:375px;
+	margin-right:375px;
+}
+form h1{
+	color:white;
+	text-align:center;
+	font-size:24px;
+}
+.form_header{
+	background-color:#666666;
+	height: 75px;
+	margin:0;
+	padding:0;
+	border-radius: 75px 75px 0px 0px;
+}
+.bottom_back{
+	background-color:#666666;
+	height: 75px;
+	margin:0;
+	padding:0;
+	border-radius: 0px 0px 75px 75px;
+}
+input{
+	color:white;
+	background-color:#333;
+	width:300px;
+	height:40px;
+	font-family:"Yu Gothic UI Light";
+	font-size:18px;
+	font-weight:bold;
+	margin-left:2px;
+	border:thin;
+	border-radius:10px;
+}
+.submit{
+	border:thick;
+	width:146px;
+	height:45px;
+	color:white;
+	elevation:lower;
+	background-color:#333;
+	cursor:pointer;
+	margin-top:5px;
+}
+.submit:hover{
+	background-color:white;
+	color:#333;
+	font-weight:bold;
+}
+.reset{
+	border:thick;
+	width:146px;
+	height:45px;
+	color:white;
+	elevation:higher;
+	background-color:#333;
+	cursor:pointer;
+	margin-top:5px;
+
+}
+.reset:hover{
+	background-color:white;
+	color:#333;
+	font-weight:bold;
+}
+.selectClass{
+	background:#333;
+	width:300px;
+	height:40px;
+	font-family:"Yu Gothic UI Light";
+	font-weight:bold;
+	color:white;
+	font-size:16px;
+	border-radius:10px;
+}
+.form_middle{
+	background-color:#666666;
+	margin:25px;
+	border-radius:100px;
+}
+option{
+	font-family:"Yu Gothic UI Light";
+	font-size:17px;
+	
+	}
+
+
+
+</style>
+</head>
+
+<body>
+<div class="MAIN" style="line-height:0;">
+<div class="MainNavBar">
+<div class="toolbar">
+<a>HOME</a>
+<a>ABOUT</a>
+<a>CONTACT</a>
+<div class="toolbar-right">
+<a onclick="scrollTo1()">ISSUE/RETURN</a>
+<a onclick="scrollTo2()">SEARCH BOOKS</a>
+<a>LIBRARY MANAGER LOGIN</a>
+</div>
+</div >
+<div class="title">
+<h1 align="center">ALPHA</h1>
+</div>
+</div><div class="container1" id="container1">
+<br></br>
+<p></p>
+<p><br></br></p>
+<div class="container-inside">
+<h1>ISSUE/RETURN BOOKS</h1>
+<p>Click Below to Access Issue/Return Portal</p>
+<p></p>
+<a href=""><button name="issue" title="Issue/Return Books">Click Here</button></a>
+</div>
+<img alt="" src="images/issue.jpg"></img>
+</div><div class="container2" id="container2">
+<p>&nbsp;</p>
+<form class="formSignUP" id="search_books" method="get" action="Search.jsp">
+<div class="form_header">
+<p>&nbsp;</p>
+<h1>SEARCH BOOKS</h1>
+<p>&nbsp;</p>
+</div>
+<div class="form_middle">
+<p></p>
+<p></p>
+<select class="selectClass" id="selectClass" name="bookSearch" onchange="changePlaceHolder()" onselect="changePlaceHolder()">
+<option id="name" value="name">BOOK NAME</option>
+<option id="id" value="id">BOOK ID</option>
+<option id="author" value="author">AUTHOR</option>
+<option id="publisher" value="publisher">PUBLISHER</option>
+<option id="pubyear" value="pubyear">YEAR OF PUBLICATION</option>
+<option id="category" value="category">CATEGORY</option>
+</select>
+<p>&nbsp;</p>
+<div style="text-align:center;">
+<input name="Text1" id="Text1" type="text">&nbsp;</input>
+<p>&nbsp;</p>
+</div>
+<p>&nbsp;</p>
+</div>
+<div class="bottom_back">
+<div style="text-align:center;">
+<input  class="submit" name="Text7" type="submit" id="Text7" title="Submit" value="Search"></input>
+<input class="reset" name="Text8" type="reset" id="Text8" title="Clear" >&nbsp;</input>
+</div>
+<p>&nbsp;</p>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>

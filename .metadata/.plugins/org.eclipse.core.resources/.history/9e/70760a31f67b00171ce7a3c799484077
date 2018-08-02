@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Issue/Return Portal</title>
+<link rel="icon" href="images/issue.png" />
+<script>
+function greenShift(){
+	document.getElementById('alert').style.background='#41f447';
+}
+
+</script>
+<style>
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    width:50%;
+    left:50%;
+    margin-left:25%;
+    height:25%;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}
+</style>
+</head>
+<body>
+<jsp:include page="cl_access.jsp"></jsp:include>
+<p></p>
+<div class="alert" id="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <% if(request.getAttribute("type").toString().equals("-1")){%>
+  <h3>Some Error Occurred! Please Try Again</h3>
+  <%} %>
+  <%if(request.getAttribute("type").toString().equals("0")){ %>
+  <h3>Book Issued</h3>
+  <p>Return Date: <%=request.getAttribute("R_DATE").toString() %></p>
+  <script>
+  greenShift();
+  </script>
+  <%} %>
+  
+</div>
+</body>
+</html>
